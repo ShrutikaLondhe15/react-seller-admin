@@ -1,24 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import Products from './components/Products'
+import ProductDetails from './components/ProductDetails';
+import React, {useState, Fragment } from 'react';
 
 function App() {
+
+  const [productsList, setProductsList] = useState([]);
+
+  const addProductHandler = (name, price) => {
+    setProductsList((prevUsersList) => {
+      return [...prevUsersList, {name: name, price: price},
+      ];
+    });
+  }
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <Fragment>
+     <Products onAddProduct={addProductHandler}/>
+     <ProductDetails  products={productsList} />
+  </Fragment>
   );
 }
 
